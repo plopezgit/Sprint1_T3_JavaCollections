@@ -1,5 +1,9 @@
 package N1Exe3;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.HashMap;
 
 public class Game {
@@ -7,7 +11,7 @@ public class Game {
 	private String gameTitle;
 	private String gamePlayer;
 	private HashMap<String, String> gameCountriesListToGuess;
-	private HashMap<String, Integer> gamePlayerPoints;
+	private HashMap<String, Integer> gamePlayerPointsClassification;
 	private int gameAttempt;
 	private int gamePoints;
 	
@@ -16,7 +20,7 @@ public class Game {
 		this.gamePlayer = gamePlayer;
 		gameTitle = "Guess the word";
 		gameCountriesListToGuess = new HashMap<String, String>();
-		gamePlayerPoints = new HashMap<String, Integer>();
+		gamePlayerPointsClassification = new HashMap<String, Integer>();
 		gameAttempt = 0;
 		gamePoints = 0;
 		
@@ -47,11 +51,11 @@ public class Game {
 	}
 
 	public HashMap<String, Integer> getGamePlayerPoints() {
-		return gamePlayerPoints;
+		return gamePlayerPointsClassification;
 	}
 
 	public void setGamePlayerPoints(HashMap<String, Integer> gamePlayerPoints) {
-		this.gamePlayerPoints = gamePlayerPoints;
+		this.gamePlayerPointsClassification = gamePlayerPoints;
 	}
 
 	public int getGameAttempt() {
@@ -74,8 +78,16 @@ public class Game {
 	//Class methods
 
 
-	public void start () {
+	public void startRound () {
+		
+		fullfilGameCountriesListToGuess ();
+		
 		do {
+			
+			gameLogic (getGuess ());
+			
+			incrementAttemps ();
+			incrementPoints ();
 			
 		} while (gameAttempt == 10);
 		
@@ -90,20 +102,42 @@ public class Game {
 		return null;
 	}
 	
-	public int gameLogic () {
+	public int gameLogic (String guess) {
 		return 0;
 	}
 	
 	public void gameOver () {
+		saveGamePlayerPoints ();
+		askNewRound ();
+		
 	}
 	
 	public void saveGamePlayerPoints () {
+		
+		try {
+			FileWriter output = new FileWriter 
+					("/Users/pedrolopez/Proyectos/Study/files/Classification.txt", true);
+			BufferedWriter buffer = new BufferedWriter(output);
+			buffer.write(LocalDate.now() + "\n" + gamePlayerPointsClassification.toString() + "\n");
+			System.out.println("Your Classification has been saved on external file.");
+			buffer.close();
+		} catch (IOException event) {
+			System.out.println("File not found.");
+		}
 	}
 	
 	public void incrementAttemps () {
 	}
 	
 	public void incrementPoints () {
+	}
+	
+	public void askNewRound () {
+		 if (Input.inputYesNo("Do you want to play again")) {
+			 startRound();
+		 } else {
+			 System. exit(0);
+		 }
 	}
 
 }
