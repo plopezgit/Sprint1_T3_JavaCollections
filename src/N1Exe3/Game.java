@@ -1,143 +1,107 @@
 package N1Exe3;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Random;
 
 public class Game {
-	
-	private String gameTitle;
+
 	private String gamePlayer;
-	private HashMap<String, String> gameCountriesListToGuess;
-	private HashMap<String, Integer> gamePlayerPointsClassification;
+	private HashMap<String, String> gameCountryCapitalMapToGuess;
+	private HashMap<String, Integer> gamePlayerPointMapClassification;
+	private Object country;
+	private String gamePlayerCapitalGuess;
 	private int gameAttempt;
-	private int gamePoints;
-	
-	
+	private int playerPoints;
+
 	public Game(String gamePlayer) {
 		this.gamePlayer = gamePlayer;
-		gameTitle = "Guess the word";
-		gameCountriesListToGuess = new HashMap<String, String>();
-		gamePlayerPointsClassification = new HashMap<String, Integer>();
-		gameAttempt = 0;
-		gamePoints = 0;
-		
-	}
-	
-	public String getGameTitle() {
-		return gameTitle;
+		gameCountryCapitalMapToGuess = new HashMap<String, String>();
+		gamePlayerPointMapClassification = new HashMap<String, Integer>();
+		gamePlayerCapitalGuess = "";
+		country = "";
+		gameAttempt = 10;
+		playerPoints = 0;
+
 	}
 
-	public void setGameTitle(String gameTitle) {
-		this.gameTitle = gameTitle;
+	public void round() {
+		fullfillGameCountryCapitalMapToGuess();
+		gameLogic();
+		gameOver();
 	}
 
-	public String getGamePlayer() {
-		return gamePlayer;
-	}
-
-	public void setGamePlayer(String gamePlayer) {
-		this.gamePlayer = gamePlayer;
-	}
-
-	public HashMap<String, String> getGameCountriesListToGuess() {
-		return gameCountriesListToGuess;
-	}
-
-	public void setGameCountriesListToGuess(HashMap<String, String> gameCountriesListToGuess) {
-		this.gameCountriesListToGuess = gameCountriesListToGuess;
-	}
-
-	public HashMap<String, Integer> getGamePlayerPoints() {
-		return gamePlayerPointsClassification;
-	}
-
-	public void setGamePlayerPoints(HashMap<String, Integer> gamePlayerPoints) {
-		this.gamePlayerPointsClassification = gamePlayerPoints;
-	}
-
-	public int getGameAttempt() {
-		return gameAttempt;
-	}
-
-	public void setGameAttempt(int gameAttempt) {
-		this.gameAttempt = gameAttempt;
-	}
-
-	public int getGamePoints() {
-		return gamePoints;
-	}
-
-	public void setGamePoints(int gamePoints) {
-		this.gamePoints = gamePoints;
-	}
-
-
-	//Class methods
-
-
-	public void startRound () {
-		
-		fullfilGameCountriesListToGuess ();
-		
-		do {
-			
-			gameLogic (getGuess ());
-			
-			incrementAttemps ();
-			incrementPoints ();
-			
-		} while (gameAttempt == 10);
-		
-		gameOver ();
-	}
-	
-	public HashMap<String, String> fullfilGameCountriesListToGuess () {
-		return null;
-	}
-	
-	public String getGuess () {
-		return null;
-	}
-	
-	public int gameLogic (String guess) {
-		return 0;
-	}
-	
-	public void gameOver () {
-		saveGamePlayerPoints ();
-		askNewRound ();
-		
-	}
-	
-	public void saveGamePlayerPoints () {
-		
+	public HashMap<String, String> fullfillGameCountryCapitalMapToGuess() {
 		try {
-			FileWriter output = new FileWriter 
-					("/Users/pedrolopez/Proyectos/Study/files/Classification.txt", true);
+			FileReader input = new FileReader 
+					("/Users/pedrolopez/Desktop/countries.txt");
+			
+			BufferedReader buffer = new BufferedReader(input);
+			String line;
+			while ((line = buffer.readLine()) != null) {
+				String[] part = line.split("\\s+");
+				gameCountryCapitalMapToGuess.put(part[0], part[1]);
+				}
+		} catch (IOException event) {
+			System.out.println("File not found.");
+		}		
+		return gameCountryCapitalMapToGuess;
+	}
+
+	public void getGuess() {
+		gamePlayerCapitalGuess = Input.inputString("Guess the capital: ");
+	}
+
+	public void gameLogic() {
+		Random random = new Random();
+		Object[] countries = gameCountryCapitalMapToGuess.keySet().toArray();
+		for (int i=0; i<gameAttempt; i++) {
+			country = countries[random.nextInt(countries.length)];
+			System.out.println(country);
+			getGuess();
+			if (gameCountryCapitalMapToGuess.get(country).equals(gamePlayerCapitalGuess)) {
+				incrementGamePoints();
+			}
+		} 
+
+	}
+
+	public void gameOver() {
+		gamePlayerPointMapClassification.put(gamePlayer, playerPoints);
+		saveGamePlayerPoints();
+		askNewRound();
+
+	}
+
+	public void saveGamePlayerPoints() {
+
+		try {
+			FileWriter output = new FileWriter("/Users/pedrolopez/Proyectos/Study/files/Classification.txt", true);
 			BufferedWriter buffer = new BufferedWriter(output);
-			buffer.write(LocalDate.now() + "\n" + gamePlayerPointsClassification.toString() + "\n");
+			buffer.write(LocalDate.now() + "\n" + gamePlayerPointMapClassification.toString() + "\n");
 			System.out.println("Your Classification has been saved on external file.");
 			buffer.close();
 		} catch (IOException event) {
 			System.out.println("File not found.");
 		}
 	}
-	
-	public void incrementAttemps () {
+
+	public void incrementGamePoints() {
+		playerPoints++;
 	}
-	
-	public void incrementPoints () {
-	}
-	
-	public void askNewRound () {
-		 if (Input.inputYesNo("Do you want to play again")) {
-			 startRound();
-		 } else {
-			 System. exit(0);
-		 }
+
+	public void askNewRound() {
+		if (Input.inputYesNo("Do you want to play again (Yes/No): \n")) {
+			round();
+		} else {
+			System.exit(0);
+		}
 	}
 
 }
