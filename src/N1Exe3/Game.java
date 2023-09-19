@@ -28,34 +28,6 @@ public class Game {
 		country = "";
 		gameAttempt = 10;
 		
-
-	}
-
-	public void round() {
-		fullfillGameCountryCapitalMapToGuess();
-		gameLogic();
-		gameOver();
-	}
-
-	public HashMap<String, String> fullfillGameCountryCapitalMapToGuess() {
-		try {
-			FileReader input = new FileReader 
-					("countries.txt");
-			
-			BufferedReader buffer = new BufferedReader(input);
-			String line;
-			while ((line = buffer.readLine()) != null) {
-				String[] part = line.split("\\s+");
-				gameCountryCapitalMapToGuess.put(part[0], part[1]);
-				}
-		} catch (IOException event) {
-			System.out.println("File not found.");
-		}		
-		return gameCountryCapitalMapToGuess;
-	}
-
-	public void getGuess() {
-		gamePlayerCapitalGuess = Input.inputString("Guess the capital: ");
 	}
 
 	public void gameLogic() {
@@ -70,6 +42,12 @@ public class Game {
 			}
 		} 
 
+	}
+	
+	public void round() {
+		fullfillGameCountryCapitalMapToGuess();
+		gameLogic();
+		gameOver();
 	}
 
 	public void gameOver() {
@@ -91,7 +69,28 @@ public class Game {
 			System.out.println("File not found.");
 		}
 	}
-
+	
+	public HashMap<String, String> fullfillGameCountryCapitalMapToGuess() {
+		try {
+			FileReader input = new FileReader 
+					("countries.txt");
+			
+			BufferedReader buffer = new BufferedReader(input);
+			String line;
+			while ((line = buffer.readLine()) != null) {
+				String[] part = line.split("\\s+");
+				gameCountryCapitalMapToGuess.put(part[0], part[1]);
+				}
+		} catch (IOException event) {
+			System.out.println("File Not found");
+		}		
+		return gameCountryCapitalMapToGuess;
+	}
+	
+	public void getGuess() {
+		gamePlayerCapitalGuess = Input.inputString("Guess the capital: ");
+	}
+	
 	public void incrementGamePoints() {
 		playerPoints++;
 	}
