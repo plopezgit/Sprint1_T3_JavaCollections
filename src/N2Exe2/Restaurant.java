@@ -97,13 +97,4 @@ public class Restaurant implements Comparable<Restaurant>/*, Comparator<Restaura
  * Ejemplo:
  * nombre: restaurant1, puntuación: 8
  * nombre: restaurant1, puntuación: 7
- * 
- * Crea una clase llamada Restaurante con dos atributos: 
- * nombre(String) y puntuación(int). 
- * Implementa los métodos necesarios para que no se puedan 
- * introducir objetos Restaurante con el mismo nombre y
- * puntuación en un HashSet creado en el main() de la aplicación.
- * Importante
- * Puede haber restaurantes con el mismo nombre con distinta puntuación, 
- * pero no puede haber restaurantes con el mismo nombre y igual puntuación.
  */
