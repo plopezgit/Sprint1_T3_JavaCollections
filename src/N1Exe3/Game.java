@@ -40,7 +40,7 @@ public class Game {
 	public HashMap<String, String> fullfillGameCountryCapitalMapToGuess() {
 		try {
 			FileReader input = new FileReader 
-					("/Users/pedrolopez/Desktop/countries.txt");
+					("src\\countries.txt");
 			
 			BufferedReader buffer = new BufferedReader(input);
 			String line;
@@ -82,7 +82,7 @@ public class Game {
 	public void saveGamePlayerPoints() {
 
 		try {
-			FileWriter output = new FileWriter("/Users/pedrolopez/Proyectos/Study/files/Classification.txt", true);
+			FileWriter output = new FileWriter("src\\classification.txt", true);
 			BufferedWriter buffer = new BufferedWriter(output);
 			buffer.write(LocalDate.now() + "\n" + gamePlayerPointMapClassification.toString() + "\n");
 			System.out.println("Your Classification has been saved on external file.");

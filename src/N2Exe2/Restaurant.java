@@ -63,7 +63,22 @@ public class Restaurant implements Comparable<Restaurant>/*, Comparator<Restaura
 
 	@Override
 	public int compareTo(Restaurant restaurant) {
-		return restaurantPoints - restaurant.restaurantPoints;
+		int comparatorRestaurantName = restaurant.getRestaurantName().compareTo(this.restaurantName);
+		int result = 0;
+		
+		if (comparatorRestaurantName > 0) {
+			result = -1; 
+		} else if (comparatorRestaurantName == 0) {
+			if (this.restaurantPoints > restaurant.getRestaurantPoints()) {
+				result = -1; 
+			} else if (this.restaurantPoints < restaurant.getRestaurantPoints()) {
+				result = 1; 
+			}
+		} else {
+			result = 1; 
+		}
+		return result;  
+		
 	}
 	
 	/*@Override
