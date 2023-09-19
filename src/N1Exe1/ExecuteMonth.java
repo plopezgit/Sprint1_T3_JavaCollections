@@ -41,7 +41,7 @@ public class ExecuteMonth {
 		monthList2.add(new Month ("June"));
 		monthList2.add(new Month ("July"));
 		monthList2.add(new Month ("August"));
-		monthList2.add(new Month ("August")); //Attempt to repete is controlled by Month.hashCode()
+		monthList2.add(new Month ("August")); //Attempt to repete is controlled 
 		monthList2.add(new Month ("September"));
 		monthList2.add(new Month ("October"));
 		monthList2.add(new Month ("November"));
