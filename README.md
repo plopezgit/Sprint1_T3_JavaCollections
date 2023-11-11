@@ -36,15 +36,15 @@ Given the file countries.txt (check the resources section) that contains countri
 > - HashMap<String, String> gameCountryCapitalMapToGuess;
 > - HashMap<String, Integer> gamePlayerPointMapClassification;
 >>
->> - 	public void gameLogic() {
->> -		Random random = new Random();
->> -		Object[] countries = gameCountryCapitalMapToGuess.keySet().toArray();
->> -		for (int i=0; i<gameAttempt; i++) {
->> -			country = countries[random.nextInt(countries.length)];
->> -			System.out.println(country);
->> -			getGuess();
->> -			if (gameCountryCapitalMapToGuess.get(country).equals(gamePlayerCapitalGuess)) {
->> -				incrementGamePoints(); } } }
+>> - public void gameLogic() {
+>> - Random random = new Random();
+>> - Object[] countries = gameCountryCapitalMapToGuess.keySet().toArray();
+>> - for (int i=0; i<gameAttempt; i++) {
+>> - country = countries[random.nextInt(countries.length)];
+>> - System.out.println(country);
+>> - getGuess();
+>> - if (gameCountryCapitalMapToGuess.get(country).equals(gamePlayerCapitalGuess)) {
+>> - incrementGamePoints(); } } }
 
 
 Level 2
@@ -66,7 +66,7 @@ There can be restaurants with the same name with different ratings, but there ca
 Using the program class above, create the necessary implementation so that the objects of the Restaurant class are sorted by name and by score in ascending order.
 
 > ##### Solution notes:
-> - 	@Override public boolean equals(Object obj) method.
+> - @Override public boolean equals(Object obj) method.
 
 
 Level 3
