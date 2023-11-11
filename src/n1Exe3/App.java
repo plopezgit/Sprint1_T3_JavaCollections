@@ -1,6 +1,6 @@
-package N1Exe3;
+package n1Exe3;
 
-public class ExecuteGame {
+public class App {
 
 	public static void main(String[] args) {
 		

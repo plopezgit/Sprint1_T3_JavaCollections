@@ -1,8 +1,8 @@
-package N1Exe2;
+package n1Exe2;
 
 import java.util.*;
 
-public class ExecuteListInteger {
+public class App {
 
 	public static void main(String[] args) {
 		

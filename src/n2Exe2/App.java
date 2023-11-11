@@ -1,8 +1,8 @@
-package N2Exe2;
+package n2Exe2;
 
 import java.util.*;
 
-public class ExecuteRestaurant {
+public class App {
 
 	public static void main(String[] args) {
 		HashSet<Restaurant> restaurantSet = new HashSet<Restaurant>();

@@ -1,8 +1,8 @@
-package N1Exe1;
+package n1Exe1;
 
 import java.util.*;
 
-public class ExecuteMonth {
+public class App {
 
 	public static void main(String[] args) {
 		

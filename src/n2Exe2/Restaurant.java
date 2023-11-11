@@ -1,4 +1,4 @@
-package N2Exe2;
+package n2Exe2;
 
 //import java.util.Comparator;
 

@@ -1,4 +1,4 @@
-package N2Exe1;
+package n2Exe1;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.TreeSet;
 
-public class ExecuteRestaurant {
+public class App {
 
 	public static void main(String[] args) {
 		HashSet<Restaurant> restaurantSet = new HashSet<Restaurant>();

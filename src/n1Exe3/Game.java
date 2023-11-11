@@ -1,4 +1,4 @@
-package N1Exe3;
+package n1Exe3;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
